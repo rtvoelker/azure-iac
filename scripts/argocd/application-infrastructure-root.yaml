@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  namespace: argocd
+  name: infrastructure
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: infrastructure
+  source:
+    path: _infrastructure
+    repoURL: <repourl>
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

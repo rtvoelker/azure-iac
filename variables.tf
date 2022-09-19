@@ -1,5 +1,5 @@
 variable "creator" {
-  default = "roland.t.voelker@gmail.com"
+  default = "someemail@gmail.com"
   type    = string
 }
 variable "subscription_id" {

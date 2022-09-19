@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  namespace: argocd
+  name: infrastructure
+spec:
+  # Project description
+  description: Sample ArgoCD GitOps Project
+
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+    - '<repourl>'
+
+  # Only permit applications to deploy to the guestbook namespace in the same cluster
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+
+  # Deny all cluster-scoped resources from being created, except for Namespace
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+  # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
+  #  namespaceResourceBlacklist:
+  #    - group: ''
+  #      kind: ResourceQuota
+  #    - group: ''
+  #      kind: LimitRange
+  #    - group: ''
+  #      kind: NetworkPolicy
+
+  # Deny all namespaced-scoped resources from being created, except for Deployment and StatefulSet
+  #  namespaceResourceWhitelist:
+  #    - group: 'apps'
+  #      kind: Deployment
+  #    - group: 'apps'
+  #      kind: StatefulSet
+
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: false

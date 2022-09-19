@@ -26,6 +26,10 @@ plan: ## runs the plan for dev env
 apply: ## runs the plan for dev env
 	terraform apply "dev.tfplan"
 	rm dev.tfplan
+
+destroy: ## destroy
+	terraform destroy
+
 format: ## format terraform files
 	terraform fmt -recursive
 terraform-upgrade: ## Upgrade to latest provider versions

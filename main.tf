@@ -12,12 +12,12 @@ locals {
 
 terraform {
   #  backend "azurerm" {
-  #    storage_account_name = "stcommonstorage"
-  #    container_name       = "stor-terraformstate"
+  #    storage_account_name = "storage-account-name"
+  #    container_name       = "container-name"
   #    key                  = "terraformstate"
   #    use_azuread_auth     = true
-  #    subscription_id      = "be09d81e-9344-4e45-a3ca-d40f6448cdc2"
-  #    tenant_id            = "71660f62-ed66-46b1-a9a6-59e052075879"
+  #    subscription_id      = ""
+  #    tenant_id            = ""
   #  }
   required_providers {
     azurerm = "3.23.0"
