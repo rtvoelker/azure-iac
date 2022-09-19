@@ -84,7 +84,15 @@ resource "azurerm_kubernetes_cluster" "default" {
 
 resource "azurerm_role_assignment" "aks_acr" {
   scope                            = azurerm_container_registry.acr.id
+  description = "Grant the K8s cluster pull access to the container registry"
   role_definition_name             = "AcrPull"
   principal_id                     = azurerm_kubernetes_cluster.default.kubelet_identity[0].object_id
   skip_service_principal_aad_check = true
+}
+
+resource "azurerm_role_assignment" "k8s_read_access_secrets" {
+  scope                = azurerm_key_vault.k8s_secret_store.id
+  description          = "Grant the K8s cluster read access to secrets only of the key vault"
+  role_definition_name = "Key Vault Secrets User"
+  principal_id         = azurerm_kubernetes_cluster.default.key_vault_secrets_provider[0].secret_identity[0].object_id
 }
